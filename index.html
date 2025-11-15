@@ -314,6 +314,13 @@
             font-weight: 500;
         }
         
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -322,7 +329,7 @@
             border-radius: 55px;
             text-decoration: none;
             font-weight: bold;
-            margin: 8px auto;
+            margin: 0 auto;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             cursor: pointer;
@@ -568,7 +575,7 @@
                         <a href="tel:+79276115233" class="contact-btn">
                             <span>📞</span> Позвонить
                         </a>
-                        <a href="mailto:syzranmaster@mail.ru" class="contact-btn">
+                        <a href="mailto:syzranmaster@mail.ru" class="contact-btn" onclick="createEmail(event)">
                             <span>✉️</span> Написать письмо
                         </a>
                         <a href="https://t.me/+79276115233" class="contact-btn" target="_blank">
@@ -599,6 +606,12 @@
     </div>
 
     <script>
+        // Функция для создания письма
+        function createEmail(event) {
+            event.preventDefault();
+            window.location.href = 'mailto:syzranmaster@mail.ru';
+        }
+
         // Определение шаблонов букв (5x7 пикселей)
         const letterPatterns = {
             'I': [
