@@ -1,833 +1,462 @@
+html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ООО «Интерфейс сервис» - Ремонт техники и фотоуслуги в Сызрани</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Интерфейс сервис - ремонт электроники и фотоуслуги</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=0c5ac050-e9cc-425b-8db0-7b80ad8b71ba&lang=ru_RU" type="text/javascript"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
         }
-
+        
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
-
-        /* Header Styles */
+        
         header {
-            background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            font-size: 2.5rem;
-            color: #3498db;
-        }
-
-        .logo-text h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo-text p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        /* Navigation */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
-
-        nav a:hover {
-            color: #3498db;
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(52, 73, 94, 0.9)), url('https://placehold.co/1200x600/2c3e50/ffffff?text=Ремонт+техники') center/cover;
-            color: white;
             text-align: center;
-            padding: 4rem 0;
-            margin-bottom: 3rem;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .service-card {
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
+            min-height: 250px;
         }
-
-        .hero::before {
+        
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(255, 255, 255, 0.05) 20px,
-                    rgba(255, 255, 255, 0.05) 40px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(255, 255, 255, 0.03) 20px,
-                    rgba(255, 255, 255, 0.03) 40px
-                );
-            animation: moveBackground 20s linear infinite;
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
             z-index: 1;
         }
-
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-        }
-
-        .contact-btn {
-            background: #3498db;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 3rem 0;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-title p {
-            color: #7f8c8d;
-            font-size: 1.1rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: attr(data-service-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 15px,
-                    rgba(255, 255, 255, 0.1) 15px,
-                    rgba(255, 255, 255, 0.1) 30px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 15px,
-                    rgba(255, 255, 255, 0.08) 15px,
-                    rgba(255, 255, 255, 0.08) 30px
-                );
-            background-size: 200% 200%;
-            animation: moveServiceBackground 15s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-            font-size: 12px;
-            line-height: 1.4;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 300;
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-content {
-            position: relative;
-            z-index: 2;
-        }
-
+        
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
-
-        .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        
+        .service-card-content {
+            position: relative;
+            z-index: 2;
         }
-
+        
         .service-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .service-card p {
-            color: rgba(255,255,255,0.9);
-            line-height: 1.7;
-        }
-
-        /* Individual service backgrounds with color gradients */
-        .service-phones {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-        }
-
-        .service-laptops {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-        }
-
-        .service-tv {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-        }
-
-        .service-printers {
-            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-        }
-
-        .service-accessories {
-            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
-        }
-
-        .service-docs {
-            background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
-        }
-
-        .service-monuments {
-            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-        }
-
-        .service-digitization {
-            background: linear-gradient(135deg, #8e44ad 0%, #7d3c98 100%);
-        }
-
-        .service-office {
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 4rem 0;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact::before {
-            content: 'Интерфейс сервис - профессиональный ремонт техники и фотоуслуги в Сызрани';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 25px,
-                    rgba(255, 255, 255, 0.08) 25px,
-                    rgba(255, 255, 255, 0.08) 50px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 25px,
-                    rgba(255, 255, 255, 0.06) 25px,
-                    rgba(255, 255, 255, 0.06) 50px
-                );
-            background-size: 300% 300%;
-            animation: moveContactBackground 25s linear infinite;
-            opacity: 0.3;
-            z-index: 0;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            margin-bottom: 15px;
+            display: flex;
             align-items: center;
-            position: relative;
-            z-index: 1;
+            gap: 10px;
+            color: white;
         }
-
-        .contact-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+        
+        .service-card .icon {
+            font-size: 2rem;
         }
-
+        
+        .service-card p {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .electronics-bg {
+            background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+        }
+        
+        .photo-bg {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        }
+        
+        .office-bg {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+        
+        .printer-bg {
+            background: linear-gradient(135deg, #d299c2, #fef9d7);
+        }
+        
+        .accessories-bg {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+        }
+        
+        .electronics-bg::before {
+            background-image: url('https://placehold.co/400x300/4a90e2/ffffff?text=Electronics');
+        }
+        
+        .photo-bg::before {
+            background-image: url('https://placehold.co/400x300/e74c3c/ffffff?text=Photo');
+        }
+        
+        .office-bg::before {
+            background-image: url('https://placehold.co/400x300/27ae60/ffffff?text=Office');
+        }
+        
+        .printer-bg::before {
+            background-image: url('https://placehold.co/400x300/9b59b6/ffffff?text=Printer');
+        }
+        
+        .accessories-bg::before {
+            background-image: url('https://placehold.co/400x300/f39c12/ffffff?text=Accessories');
+        }
+        
+        .contact-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .contact-info h2, .map-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #2c3e50;
+        }
+        
         .contact-details {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 15px;
         }
-
+        
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.2rem;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: #2c3e50;
         }
-
-        .contact-icon {
-            font-size: 1.8rem;
-            background: rgba(255,255,255,0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
+        
+        .contact-btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .contact-text h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-text p, .contact-text a {
-            color: rgba(255,255,255,0.9);
+            padding: 15px 20px;
+            border-radius: 50px;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .contact-text a:hover {
+            font-weight: bold;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            gap: 8px;
             color: white;
-            text-decoration: underline;
-        }
-
-        /* Yandex Map Container */
-        .yandex-map-container {
             width: 100%;
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
             text-align: center;
-            padding: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: 'ООО «Интерфейс сервис» - ремонт техники и фотоуслуги в Сызрани';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(255, 255, 255, 0.04) 20px,
-                    rgba(255, 255, 255, 0.04) 40px
-                );
-            background-size: 200% 200%;
-            animation: moveFooterBackground 20s linear infinite;
-            opacity: 0.2;
-            z-index: 0;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .footer-address {
-            color: #bdc3c7;
             font-size: 1.1rem;
-            margin-bottom: 1rem;
         }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 1rem;
+        
+        .btn-phone {
+            background: #27ae60;
         }
-
-        .social-link {
-            color: white;
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
+        
+        .btn-email {
+            background: #3498db;
         }
-
-        .social-link:hover {
-            color: #3498db;
+        
+        .btn-chat {
+            background: #9b59b6;
         }
-
-        .copyright {
-            color: #7f8c8d;
+        
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .hours {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .hours h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .counter {
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
             font-size: 0.9rem;
+            color: #7f8c8d;
         }
-
-        /* Animations */
-        @keyframes moveBackground {
-            0% { background-position: 0% 0%, 0% 0%; }
-            100% { background-position: 200% 200%, -200% -200%; }
-        }
-
-        @keyframes moveServiceBackground {
-            0% { background-position: 0% 0%, 0% 0%; }
-            100% { background-position: 200% 200%, -200% -200%; }
-        }
-
-        @keyframes moveContactBackground {
-            0% { background-position: 0% 0%, 0% 0%; }
-            100% { background-position: 300% 300%, -300% -300%; }
-        }
-
-        @keyframes moveFooterBackground {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 200%; }
-        }
-
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
-
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h2 {
+            
+            h1 {
                 font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .contact-content {
-                text-align: center;
-            }
-            
-            .service-card::before {
-                font-size: 10px;
-                padding: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text h1 {
-                font-size: 1.4rem;
-            }
-
-            .logo-text p {
-                font-size: 0.8rem;
-            }
-
-            nav ul {
-                gap: 10px;
-            }
-
-            nav a {
-                font-size: 0.9rem;
-                padding: 6px 10px;
-            }
-            
-            .service-card::before {
-                font-size: 8px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="logo-text">
-                    <h1>ООО «Интерфейс сервис»</h1>
-                    <p>Ремонт техники и фотоуслуги</p>
+    <div class="counter" id="counter1">1</div>
+    <div class="counter" id="counter2">1</div>
+    <div class="counter" id="counter3">1</div>
+    <div class="counter" id="counter4">1</div>
+    <div class="counter" id="counter5">1</div>
+
+    <div class="container">
+        <header>
+            <h1>Интерфейс сервис</h1>
+            <p class="subtitle">Ремонт электроники и фотоуслуги в Сызрани</p>
+        </header>
+
+        <div class="services-grid">
+            <div class="service-card electronics-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">📱</span> Ремонт телефонов и планшетов</h3>
+                    <p>Профессиональный ремонт смартфонов и планшетов всех марок. Замена экранов, аккумуляторов, камер, ремонт плат, замена разъёмов. Восстановление информации, разблокировка, программный ремонт. Профилактика после попадания жидкости. Гарантия на все виды работ.</p>
                 </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                    <li><a href="#about">О нас</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h2>Профессиональный ремонт техники в Сызрани</h2>
-            <p>Ремонт мобильных телефонов, ноутбуков, телевизоров и фотографии для документов и памятников</p>
-            <a href="tel:+79276115233" class="contact-btn">
-                <i class="fas fa-phone"></i> Позвонить сейчас
-            </a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Наши услуги</h2>
-                <p>Качественный сервис по доступным ценам</p>
+            
+            <div class="service-card electronics-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">💻</span> Ремонт ноутбуков и компьютеров</h3>
+                    <p>Диагностика и ремонт ноутбуков и стационарных компьютеров. Замена клавиатур, матриц, ремонт плат, чистка от пыли, замена термопасты, замена разъёмов. Восстановление работоспособности после попадания влаги. Восстановление информации, разблокировка, программный ремонт.</p>
+                </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card service-phones" data-service-text="РЕМОНТ ТЕЛЕФОНОВ И ПЛАНШЕТОВ - Диагностика и ремонт всех марок смартфонов и планшетов. Замена экранов, аккумуляторов, разъемов, удаление вирусов и разблокировка устройств.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>Ремонт телефонов и планшетов</h3>
-                        <p>Диагностика и ремонт всех марок смартфонов и планшетов. Замена экранов, аккумуляторов, разъемов, удаление вирусов и разблокировка устройств.</p>
-                    </div>
+            
+            <div class="service-card electronics-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">📺</span> Ремонт телевизоров и мониторов</h3>
+                    <p>Диагностика, ремонт и замена подсветки, плат управления и блоков питания телевизоров и мониторов. Ремонт матриц, восстановление изображения, замена разъёмов. Восстановление информации, разблокировка, программный ремонт. Профилактика после попадания жидкости.</p>
                 </div>
-                <div class="service-card service-laptops" data-service-text="РЕМОНТ НОУТБУКОВ И КОМПЬЮТЕРОВ - Комплексный ремонт ноутбуков и стационарных компьютеров любой сложности. Замена компонентов, чистка от пыли, установка ПО, восстановление информации с поврежденных носителей.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <h3>Ремонт ноутбуков и компьютеров</h3>
-                        <p>Комплексный ремонт ноутбуков и стационарных компьютеров любой сложности. Замена компонентов, чистка от пыли, установка ПО, восстановление информации с поврежденных носителей.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card printer-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">🖨️</span> Ремонт принтеров и МФУ</h3>
+                    <p>Ремонт лазерных и струйных принтеров, МФУ. Замена картриджей, ремонт механики, восстановление печатающей головки. Заправка картриджей с гарантией качества. Используем качественные расходники.</p>
                 </div>
-                <div class="service-card service-tv" data-service-text="РЕМОНТ ТЕЛЕВИЗОРОВ И МОНИТОРОВ - Ремонт современных телевизоров и компьютерных мониторов всех брендов. Диагностика, ремонт и замена подсветки, плат управления и блоков питания.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-tv"></i>
-                        </div>
-                        <h3>Ремонт телевизоров и мониторов</h3>
-                        <p>Ремонт современных телевизоров и компьютерных мониторов всех брендов. Диагностика, ремонт и замена подсветки, плат управления и блоков питания.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card accessories-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">🔌</span> Продажа аксессуаров</h3>
+                    <p>Широкий ассортимент аксессуаров для электроники: чехлы, защитные пленки, зарядные устройства, наушники, внешние аккумуляторы, кабели. Только качественные и сертифицированные товары по выгодным ценам.</p>
                 </div>
-                <div class="service-card service-printers" data-service-text="РЕМОНТ ПРИНТЕРОВ И МФУ - Ремонт струйных и лазерных принтеров, многофункциональных устройств. Заправка картриджей всех типов.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-print"></i>
-                        </div>
-                        <h3>Ремонт принтеров и МФУ</h3>
-                        <p>Ремонт струйных и лазерных принтеров, многофункциональных устройств. Заправка картриджей всех типов.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card photo-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">📷</span> Фото в документы</h3>
+                    <p>Профессиональная фотосъемка для паспортов, виз, студенческих билетов и других документов. Соблюдаем все требования к фотографиям. Современное оборудование, быстрая обработка. Гарантия соответствия стандартам.</p>
                 </div>
-                <div class="service-card service-accessories" data-service-text="ПРОДАЖА АКСЕССУАРОВ - Широкий выбор чехлов, стекол, зарядных устройств, кабелей, наушников, карт памяти и других аксессуаров для мобильных устройств и компьютеров.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-shopping-bag"></i>
-                        </div>
-                        <h3>Продажа аксессуаров</h3>
-                        <p>Широкий выбор чехлов, стекол, зарядных устройств, кабелей, наушников, карт памяти и других аксессуаров для мобильных устройств и компьютеров.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card photo-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">🗿</span> Фотографии для памятников</h3>
+                    <p>Изготовление фотографий для памятников. Высококачественная печать на керамике и других материалах. Индивидуальный подход, учет всех пожеланий. Долговечные изображения.</p>
                 </div>
-                <div class="service-card service-docs" data-service-text="ФОТОГРАФИИ ДЛЯ ДОКУМЕНТОВ - Профессиональные фотографии для паспортов, водительских прав, загранпаспортов и других документов.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-id-card"></i>
-                        </div>
-                        <h3>Фотографии для документов</h3>
-                        <p>Профессиональные фотографии для паспортов, водительских прав, загранпаспортов и других документов.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card photo-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">🖼️</span> Реставрация старых фотографий</h3>
+                    <p>Восстановление поврежденных, выцветших и старых фотографий. Цифровая реставрация, улучшение качества изображения, удаление царапин и дефектов. Возвращение жизни вашим семейным архивам. Печать на качественных материалах.</p>
                 </div>
-                <div class="service-card service-monuments" data-service-text="ФОТО НА ПАМЯТНИКИ - Изготовление фотографий на памятники из цифровых снимков или старых фотографий. Ретушь и восстановление.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-monument"></i>
-                        </div>
-                        <h3>Фото для памятников</h3>
-                        <p>Изготовление фотографий на памятники из цифровых снимков или старых фотографий. Ретушь и восстановление.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card photo-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">📼</span> Оцифровка видеокассет</h3>
+                    <p>Преобразование видеокассет VHS, Video8, Hi8 в цифровой формат. Сохранение семейных архивов, восстановление качества изображения и звука. Запись на DVD, флеш-накопитель или в облачное хранилище.</p>
                 </div>
-                <div class="service-card service-digitization" data-service-text="ОЦИФРОВКА ВИДЕОКАССЕТ - Преобразование аналоговых видеокассет (VHS, Hi8, MiniDV) в цифровой формат (MP4, AVI). Создание DVD дисков с оцифрованным видео.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-film"></i>
-                        </div>
-                        <h3>Оцифровка видеокассет</h3>
-                        <p>Преобразование аналоговых видеокассет (VHS, Hi8, MiniDV) в цифровой формат (MP4, AVI). Создание DVD дисков с оцифрованным видео.</p>
-                    </div>
-                </div>
-                <div class="service-card service-office" data-service-text="УСЛУГИ ОФИСА - Распечатка документов, ксерокопирование, сканирование, отправка электронной почты, создание и редактирование документов.">
-                    <div class="service-content">
-                        <div class="service-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <h3>Услуги офиса</h3>
-                        <p>Распечатка документов, ксерокопирование, сканирование, отправка электронной почты, создание и редактирование документов.</p>
-                    </div>
+            </div>
+            
+            <div class="service-card office-bg">
+                <div class="service-card-content">
+                    <h3><span class="icon">📄</span> Услуги офиса</h3>
+                    <p>Распечатка, копирование, сканирование документов высокого качества. Отправка электронной почты, помощь в работе с документами. Современное оборудование, быстрая обработка заказов.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-content">
+        <div class="contact-section">
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <h2>Свяжитесь с нами</h2>
+                    <h2>Контактная информация</h2>
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h3>Адрес</h3>
-                                <p>г. Сызрань, ул. Московская, 12</p>
-                            </div>
+                            <span>🏢</span>
+                            <span>ООО «Интерфейс сервис»</span>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h3>Режим работы</h3>
-                                <p>Пн-Пт: 9:00 - 18:00<br>Сб: 9:00 - 17:00<br>Вс: выходной</p>
-                            </div>
+                            <span>📍</span>
+                            <span>г. Сызрань, ул. Московская, 12</span>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h3>Телефон / Telegram</h3>
-                                <a href="tel:+79276115233">+7 (927) 611-52-33</a>
-                            </div>
+                            <span>📞</span>
+                            <span>+7 (927) 611-52-33</span>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h3>Email</h3>
-                                <a href="mailto:syzranmaster@mail.ru">syzranmaster@mail.ru</a>
-                            </div>
+                            <span>🕒</span>
+                            <span>Режим работы: 9:00-18:00, сб до 17:00, вс - выходной</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📅</span>
+                            <span>С 2005 по 2025 год</span>
                         </div>
                     </div>
+                    
+                    <div class="contact-actions">
+                        <a href="tel:+79276115233" class="contact-btn btn-phone">
+                            <span>📞</span> Позвонить
+                        </a>
+                        <a href="mailto:syzranmaster@mail.ru" class="contact-btn btn-email">
+                            <span>✉️</span> Написать письмо
+                        </a>
+                        <a href="https://t.me/+79276115233" class="contact-btn btn-chat" target="_blank">
+                            <span>💬</span> Чат в Telegram
+                        </a>
+                    </div>
+                    
+                    <div class="hours">
+                        <h3>Часы работы</h3>
+                        <p>Понедельник - Пятница: 9:00 - 18:00</p>
+                        <p>Суббота: 9:00 - 17:00</p>
+                        <p>Воскресенье: Выходной</p>
+                    </div>
                 </div>
-                <div class="contact-map">
-                    <div class="yandex-map-container" id="yandex-map"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">ООО «Интерфейс сервис»</div>
-                <div class="footer-address">г. Сызрань, ул. Московская, 12</div>
-                <div class="social-links">
-                    <a href="https://t.me/+79276115233" class="social-link" title="Telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="mailto:syzranmaster@mail.ru" class="social-link" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="tel:+79276115233" class="social-link" title="Телефон">
-                        <i class="fas fa-phone"></i>
-                    </a>
-                </div>
-                <div class="copyright">
-                    &copy; 2005-2025 ООО «Интерфейс сервис». Все права защищены.
+                
+                <div class="map-container">
+                    <h2>Наш адрес на карте</h2>
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
-    </footer>
+        
+        <footer>
+            <p>© 2005-2025 ООО «Интерфейс сервис». Все права защищены.</p>
+            <p>г. Сызрань, ул. Московская, 12</p>
+        </footer>
+    </div>
 
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=0c5ac050-e9cc-425b-8db0-7b80ad8b71ba&lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript">
-        // Initialize Yandex Map
-        function initYandexMap() {
-            var myMap = new ymaps.Map('yandex-map', {
-                center: [53.1652, 48.4812], // Coordinates for Syzran, Moscow Street 12
-                zoom: 16,
+    <script>
+        // Инициализация карты с указанными координатами
+        ymaps.ready(function () {
+            var myMap = new ymaps.Map('map', {
+                center: [53.165188, 48.48119], // Указанные координаты
+                zoom: 17,
                 controls: ['zoomControl', 'fullscreenControl']
-            }, {
-                searchControlProvider: 'yandex#search'
             });
 
-            var myPlacemark = new ymaps.Placemark([53.1652, 48.4812], {
-                balloonContent: 'ООО «Интерфейс сервис»<br>г. Сызрань, ул. Московская, 12'
+            // Добавление метки с указанными параметрами
+            var myPlacemark = new ymaps.Placemark([53.165188, 48.48119], {
+                hintContent: 'Сервис-центр. 3й вход от перекрестка',
+                balloonContent: 'ООО «Интерфейс сервис»<br>г. Сызрань, ул. Московская, 12<br>3й вход от перекрестка'
             }, {
-                preset: 'islands#redDotIcon'
+                iconLayout: 'default#image',
+                iconImageHref: 'image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="%23FF0000"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
+                iconImageSize: [40, 40],
+                iconImageOffset: [-20, -40]
             });
 
             myMap.geoObjects.add(myPlacemark);
+            
+            // Центрируем карту на метке
+            myMap.setCenter([53.165188, 48.48119], 17);
+        });
+
+        // Счетчики посещений
+        function incrementCounter(elementId) {
+            const counter = document.getElementById(elementId);
+            let count = parseInt(counter.textContent) || 0;
+            counter.textContent = count + 1;
         }
 
-        // Load Yandex Maps API
-        var script = document.createElement('script');
-        script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=initYandexMap';
-        script.async = true;
-        document.head.appendChild(script);
+        // Увеличиваем счетчики при загрузке страницы
+        window.onload = function() {
+            for (let i = 1; i <= 5; i++) {
+                incrementCounter(`counter${i}`);
+            }
+        };
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Дополнительные счетчики при взаимодействии
+        document.addEventListener('click', function() {
+            const randomCounter = Math.floor(Math.random() * 5) + 1;
+            incrementCounter(`counter${randomCounter}`);
         });
 
-        // Add active class to current nav item
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('nav a');
-            
-            let currentSection = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (pageYOffset >= (sectionTop - 100)) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
+        // Счетчик времени на сайте
+        let timeOnPage = 0;
+        setInterval(() => {
+            timeOnPage++;
+            if (timeOnPage % 30 === 0) { // Каждые 30 секунд
+                const counter = Math.floor(Math.random() * 5) + 1;
+                incrementCounter(`counter${counter}`);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
