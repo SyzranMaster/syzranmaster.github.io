@@ -15,8 +15,8 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #333;
+            background-color: #000;
+            color: #fff;
             overflow-x: hidden;
         }
         
@@ -27,7 +27,7 @@
         }
         
         .header-container {
-            background: rgba(255, 255, 255, 0.95);
+            background-color: #000;
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 40px;
@@ -41,9 +41,9 @@
         .led-display {
             display: inline-block;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             padding: 20px;
-            background-color: #111;
+            background-color: #000;
             border: 3px solid #333;
             border-radius: 8px;
             box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
@@ -60,27 +60,27 @@
         
         .letter {
             display: inline-block;
-            margin: 0 3px;
+            margin: 0 1px;
         }
         
         .pixel-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(7, 1fr);
-            gap: 1.5px;
+            gap: 0.5px;
         }
         
         .pixel {
-            width: 8px;
-            height: 8px;
-            background-color: #222;
-            border: 1px solid #444;
-            border-radius: 1px;
+            width: 5px;
+            height: 5px;
+            background-color: #000;
+            border: 0.5px solid #222;
+            border-radius: 0.5px;
         }
         
         .pixel.on {
             background-color: #0f0;
-            box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+            box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             animation: flicker 2s infinite alternate;
         }
         
@@ -103,35 +103,35 @@
         @keyframes flicker {
             0% {
                 background-color: #0f0;
-                box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+                box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             }
             30% {
                 background-color: #0f0;
-                box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+                box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             }
             35% {
                 background-color: #0c0;
-                box-shadow: 0 0 5px rgba(0, 200, 0, 0.6);
+                box-shadow: 0 0 4px rgba(0, 200, 0, 0.6);
             }
             40% {
                 background-color: #0f0;
-                box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+                box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             }
             70% {
                 background-color: #0f0;
-                box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+                box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             }
             75% {
                 background-color: #0a0;
-                box-shadow: 0 0 3px rgba(0, 150, 0, 0.4);
+                box-shadow: 0 0 2px rgba(0, 150, 0, 0.4);
             }
             80% {
                 background-color: #0f0;
-                box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+                box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             }
             100% {
                 background-color: #0f0;
-                box-shadow: 0 0 8px rgba(0, 255, 0, 0.9);
+                box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
             }
         }
         
@@ -156,35 +156,19 @@
         
         .subtitle {
             font-size: 1.8rem;
-            color: #2c3e50;
+            color: #0f0;
             font-weight: 600;
             letter-spacing: 1px;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         
         .location {
             font-size: 1.3rem;
-            color: #5f27cd;
+            color: #0f0;
             font-weight: 500;
             letter-spacing: 0.5px;
-        }
-        
-        /* Добавляем декоративные элементы в заголовок */
-        .header-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ff6b6b" opacity="0.3"/></svg>');
-            opacity: 0.3;
-            animation: float 20s infinite linear;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100px) translateX(100px); }
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         
         .services-grid {
@@ -198,13 +182,14 @@
             border-radius: 18px;
             padding: 30px;
             color: white;
+            background: linear-gradient(135deg, #2c7873, #4a90e2);
             box-shadow: 0 12px 35px rgba(0,0,0,0.25);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             min-height: 270px;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .service-card::before {
@@ -214,14 +199,15 @@
             left: 0;
             right: 0;
             bottom: 0;
-            opacity: 0.15;
+            opacity: 0.1;
             z-index: 1;
+            background-image: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
         }
         
         .service-card:hover {
             transform: translateY(-12px) scale(1.02);
             box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-            border-color: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
         .service-card-content {
@@ -236,6 +222,7 @@
             align-items: center;
             gap: 12px;
             font-weight: 700;
+            color: #fff;
         }
         
         .service-card .icon {
@@ -245,7 +232,7 @@
         
         .service-card p {
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.98);
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
@@ -277,11 +264,12 @@
         }
         
         .contact-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 20px;
             padding: 35px;
             margin: 40px 0;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .contact-grid {
@@ -293,10 +281,11 @@
         .contact-info h2, .map-container h2 {
             margin-bottom: 25px;
             font-size: 1.9rem;
-            color: #2c3e50;
+            color: #0f0;
             font-weight: 700;
             position: relative;
             padding-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         
         .contact-info h2::after, .map-container h2::after {
@@ -306,7 +295,7 @@
             left: 0;
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, #5f27cd, #ff6b6b);
+            background: linear-gradient(90deg, #0f0, #0f0);
             border-radius: 2px;
         }
         
@@ -321,7 +310,7 @@
             align-items: center;
             gap: 12px;
             font-size: 1.15rem;
-            color: #2c3e50;
+            color: #fff;
             font-weight: 500;
         }
         
@@ -338,29 +327,30 @@
             border: none;
             cursor: pointer;
             gap: 10px;
-            color: white;
+            color: #000;
             width: 100%;
             text-align: center;
             font-size: 1.15rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.15);
             font-weight: 600;
+            background: linear-gradient(135deg, #0f0, #0f0);
         }
         
         .btn-phone {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: linear-gradient(135deg, #0f0, #0f0);
         }
         
         .btn-email {
-            background: linear-gradient(135deg, #3498db, #5dade2);
+            background: linear-gradient(135deg, #0f0, #0f0);
         }
         
         .btn-chat {
-            background: linear-gradient(135deg, #9b59b6, #bb8fce);
+            background: linear-gradient(135deg, #0f0, #0f0);
         }
         
         .contact-btn:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,255,0,0.3);
         }
         
         #map {
@@ -368,26 +358,27 @@
             height: 420px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.18);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(0, 255, 0, 0.3);
         }
         
         .hours {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.2);
             padding: 20px;
             border-radius: 12px;
             margin-top: 25px;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 255, 0, 0.2);
         }
         
         .hours h3 {
-            color: #2c3e50;
+            color: #0f0;
             margin-bottom: 12px;
             font-size: 1.3rem;
             font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         
         .hours p {
-            color: #555;
+            color: #fff;
             margin: 8px 0;
             font-size: 1.05rem;
         }
@@ -398,15 +389,16 @@
             font-weight: bold;
             text-align: center;
             margin-top: 18px;
-            color: white;
+            color: #000;
             font-size: 1.1rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            background: linear-gradient(135deg, #0f0, #0f0);
         }
         
         .status-open {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: linear-gradient(135deg, #0f0, #0f0);
         }
         
         .status-closed {
@@ -426,15 +418,16 @@
             padding: 25px;
             margin-top: 50px;
             font-size: 1rem;
-            color: #7f8c8d;
-            background: rgba(255, 255, 255, 0.1);
+            color: #0f0;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 0, 0.2);
         }
         
         footer p {
             margin: 8px 0;
             font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         
         @media (max-width: 768px) {
@@ -451,12 +444,20 @@
             }
             
             .pixel {
-                width: 6px;
-                height: 6px;
+                width: 4px;
+                height: 4px;
             }
             
             .services-grid {
                 gap: 20px;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .location {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -738,47 +739,79 @@
         // Очищаем контейнер
         ledDisplay.innerHTML = '';
         
-        // Создаем каждое слово на отдельной строке
-        const words = ["INTERFACE", "SERVICE"];
+        // Создаем первую строку: INTERFACE (9 букв)
+        const word1 = "INTERFACE";
+        const word1Div = document.createElement('div');
+        word1Div.className = 'word';
         
-        for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
-            const word = words[wordIndex];
-            const wordDiv = document.createElement('div');
-            wordDiv.className = 'word';
+        for (let i = 0; i < 9; i++) {
+            const char = i < word1.length ? word1[i] : ' ';
+            const letterDiv = document.createElement('div');
+            letterDiv.className = 'letter';
             
-            // Создаем каждую букву в слове (максимум 9 букв в строке)
-            for (let i = 0; i < 9; i++) {
-                const char = i < word.length ? word[i] : ' ';
-                const letterDiv = document.createElement('div');
-                letterDiv.className = 'letter';
-                
-                const pixelGrid = document.createElement('div');
-                pixelGrid.className = 'pixel-grid';
-                
-                const pattern = letterPatterns[char] || letterPatterns[' '];
-                
-                for (let row = 0; row < pattern.length; row++) {
-                    for (let col = 0; col < pattern[row].length; col++) {
-                        const pixel = document.createElement('div');
-                        pixel.className = 'pixel';
-                        
-                        if (pattern[row][col]) {
-                            pixel.classList.add('on');
-                            // Добавляем случайную интенсивность свечения
-                            const intensity = 0.7 + Math.random() * 0.3;
-                            pixel.style.opacity = intensity;
-                        }
-                        
-                        pixelGrid.appendChild(pixel);
+            const pixelGrid = document.createElement('div');
+            pixelGrid.className = 'pixel-grid';
+            
+            const pattern = letterPatterns[char] || letterPatterns[' '];
+            
+            for (let row = 0; row < pattern.length; row++) {
+                for (let col = 0; col < pattern[row].length; col++) {
+                    const pixel = document.createElement('div');
+                    pixel.className = 'pixel';
+                    
+                    if (pattern[row][col]) {
+                        pixel.classList.add('on');
+                        // Добавляем случайную интенсивность свечения
+                        const intensity = 0.7 + Math.random() * 0.3;
+                        pixel.style.opacity = intensity;
                     }
+                    
+                    pixelGrid.appendChild(pixel);
                 }
-                
-                letterDiv.appendChild(pixelGrid);
-                wordDiv.appendChild(letterDiv);
             }
             
-            ledDisplay.appendChild(wordDiv);
+            letterDiv.appendChild(pixelGrid);
+            word1Div.appendChild(letterDiv);
         }
+        
+        ledDisplay.appendChild(word1Div);
+        
+        // Создаем вторую строку: SERVICE с пробелами по краям для центрирования
+        const word2 = " SERVICE ";
+        const word2Div = document.createElement('div');
+        word2Div.className = 'word';
+        
+        for (let i = 0; i < 9; i++) {
+            const char = i < word2.length ? word2[i] : ' ';
+            const letterDiv = document.createElement('div');
+            letterDiv.className = 'letter';
+            
+            const pixelGrid = document.createElement('div');
+            pixelGrid.className = 'pixel-grid';
+            
+            const pattern = letterPatterns[char] || letterPatterns[' '];
+            
+            for (let row = 0; row < pattern.length; row++) {
+                for (let col = 0; col < pattern[row].length; col++) {
+                    const pixel = document.createElement('div');
+                    pixel.className = 'pixel';
+                    
+                    if (pattern[row][col]) {
+                        pixel.classList.add('on');
+                        // Добавляем случайную интенсивность свечения
+                        const intensity = 0.7 + Math.random() * 0.3;
+                        pixel.style.opacity = intensity;
+                    }
+                    
+                    pixelGrid.appendChild(pixel);
+                }
+            }
+            
+            letterDiv.appendChild(pixelGrid);
+            word2Div.appendChild(letterDiv);
+        }
+        
+        ledDisplay.appendChild(word2Div);
         
         // Добавляем эффект сканирующей линии
         const scanline = document.createElement('div');
