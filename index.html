@@ -264,12 +264,9 @@
         }
         
         .contact-section {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 35px;
-            margin: 40px 0;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            padding: 0;
+            margin: 0 0 40px 0;
         }
         
         .contact-grid {
@@ -283,20 +280,7 @@
             font-size: 1.9rem;
             color: #0f0;
             font-weight: 700;
-            position: relative;
-            padding-bottom: 10px;
             text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-        }
-        
-        .contact-info h2::after, .map-container h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #0f0, #0f0);
-            border-radius: 2px;
         }
         
         .contact-details {
@@ -316,38 +300,46 @@
         
         .contact-actions {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            flex-direction: row;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
         }
         
         .contact-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 16px 20px;
-            border-radius: 55px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             text-decoration: none;
             font-weight: bold;
-            margin: 0 auto;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: none;
+            border: 2px solid rgba(0, 255, 0, 0.3);
             cursor: pointer;
-            gap: 10px;
-            color: #000;
-            width: 220px;
-            text-align: center;
-            font-size: 1.15rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            font-weight: 600;
-            background: linear-gradient(135deg, #0f0, #0f0);
-            opacity: 0.8;
+            color: #0f0;
+            font-size: 2rem;
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
         }
         
         .contact-btn:hover {
-            opacity: 1;
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(0,255,0,0.3);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+            border-color: rgba(0, 255, 0, 0.6);
+        }
+        
+        .contact-btn:active {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+            border-color: rgba(0, 255, 0, 1);
+            animation: glow 0.3s ease;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.4); }
         }
         
         #map {
@@ -458,8 +450,13 @@
             }
             
             .contact-btn {
-                width: 200px;
-                font-size: 1rem;
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+            
+            .contact-actions {
+                gap: 20px;
             }
         }
     </style>
@@ -525,8 +522,8 @@
             
             <div class="service-card photo-bg color-1">
                 <div class="service-card-content">
-                    <h3><span class="icon">🗿</span> Фотографии для памятников</h3>
-                    <p>Изготовление фотографий для памятников. Высококачественная печать на керамике и других материалах. Индивидуальный подход, учет всех пожеланий. Долговечные изображения.</p>
+                    <h3><span class="icon">🗿</span> Фотографии и надписи для памятников</h3>
+                    <p>Изготовление фотографий и надписей для памятников. Высококачественная печать на металле, керамике и других материалах. Индивидуальный подход, учет всех пожеланий. Долговечные изображения.</p>
                 </div>
             </div>
             
@@ -572,14 +569,16 @@
                     </div>
                     
                     <div class="contact-actions">
-                        <a href="tel:+79276115233" class="contact-btn">
-                            <span>📞</span> Позвонить
+                        <a href="tel:+79276115233" class="contact-btn" onclick="addGlowEffect(this)">
+                            📞
                         </a>
-                        <a href="mailto:syzranmaster@mail.ru" class="contact-btn" onclick="createEmail(event)">
-                            <span>✉️</span> Написать письмо
+                        <a href="mailto:syzranmaster@mail.ru" class="contact-btn" onclick="addGlowEffect(this)">
+                            ✉️
                         </a>
-                        <a href="https://t.me/+79276115233" class="contact-btn" target="_blank">
-                            <span>💬</span> Чат в Telegram
+                        <a href="https://t.me/+79276115233" class="contact-btn" target="_blank" onclick="addGlowEffect(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#0f0">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.27-10.27c.29-.29.29-.77 0-1.06-.29-.29-.77-.29-1.06 0l-4.25 4.25-1.79-1.79c-.29-.29-.77-.29-1.06 0-.29.29-.29.77 0 1.06l2.32 2.32 4.78-4.78z"/>
+                            </svg>
                         </a>
                     </div>
                     
@@ -606,10 +605,15 @@
     </div>
 
     <script>
-        // Функция для создания письма
-        function createEmail(event) {
-            event.preventDefault();
-            window.location.href = 'mailto:syzranmaster@mail.ru';
+        // Функция для добавления эффекта подсветки при нажатии
+        function addGlowEffect(element) {
+            element.style.boxShadow = '0 0 30px rgba(0, 255, 0, 0.8)';
+            element.style.borderColor = 'rgba(0, 255, 0, 1)';
+            
+            setTimeout(() => {
+                element.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.4)';
+                element.style.borderColor = 'rgba(0, 255, 0, 0.6)';
+            }, 300);
         }
 
         // Определение шаблонов букв (5x7 пикселей)
@@ -840,7 +844,7 @@
                 balloonContent: 'ООО «Интерфейс сервис»<br>г. Сызрань, ул. Московская, 12<br>3й вход от перекрестка'
             }, {
                 iconLayout: 'default#image',
-                iconImageHref: 'image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="%23FF0000"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
+                iconImageHref: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="%23FF0000"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
                 iconImageSize: [40, 40],
                 iconImageOffset: [-20, -40]
             });
