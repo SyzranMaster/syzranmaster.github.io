@@ -277,7 +277,7 @@
         
         .contact-info h2, .map-container h2 {
             margin-bottom: 25px;
-            font-size: 1.9rem;
+            font-size: 1.6rem;
             color: #0f0;
             font-weight: 700;
             text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
@@ -378,24 +378,28 @@
             font-weight: bold;
             text-align: center;
             margin-top: 18px;
-            color: #000;
             font-size: 1.1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            background: linear-gradient(135deg, #0f0, #0f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .status-open {
-            background: linear-gradient(135deg, #0f0, #0f0);
+            color: #0f0;
         }
         
         .status-closed {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #e74c3c;
         }
         
         .status-warning {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #f39c12;
+        }
+        
+        .lock-icon {
+            font-size: 1.3rem;
+            font-weight: bold;
         }
         
         .counter {
@@ -587,7 +591,10 @@
                         <p>Понедельник - Пятница: 9:00 - 18:00</p>
                         <p>Суббота: 9:00 - 17:00</p>
                         <p>Воскресенье: Выходной</p>
-                        <div id="statusIndicator" class="status-indicator">Загрузка...</div>
+                        <div id="statusIndicator" class="status-indicator">
+                            <span class="lock-icon">🔒</span>
+                            <span>Загрузка...</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -844,7 +851,7 @@
                 balloonContent: 'ООО «Интерфейс сервис»<br>г. Сызрань, ул. Московская, 12<br>3й вход от перекрестка'
             }, {
                 iconLayout: 'default#image',
-                iconImageHref: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="%23FF0000"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
+                iconImageHref: 'image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="%23FF0000"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
                 iconImageSize: [40, 40],
                 iconImageOffset: [-20, -40]
             });
@@ -904,14 +911,17 @@
             const totalMinutes = hours * 60 + minutes;
             
             const statusIndicator = document.getElementById('statusIndicator');
+            const lockIcon = statusIndicator.querySelector('.lock-icon');
+            const statusText = statusIndicator.querySelector('span:last-child');
             
             // Понедельник - Пятница: 9:00 - 18:00
             // Суббота: 9:00 - 17:00
             // Воскресенье: выходной
             
             if (dayOfWeek === 0) { // Воскресенье
-                statusIndicator.textContent = 'Закрыто';
+                statusText.textContent = 'Закрыто';
                 statusIndicator.className = 'status-indicator status-closed';
+                lockIcon.textContent = '🔒';
                 return;
             }
             
@@ -922,18 +932,22 @@
                 if (totalMinutes < openTime) {
                     const minutesToOpen = openTime - totalMinutes;
                     if (minutesToOpen <= 60) {
-                        statusIndicator.textContent = `До открытия осталось: ${minutesToOpen} минут`;
+                        statusText.textContent = `До открытия осталось: ${minutesToOpen} минут`;
                         statusIndicator.className = 'status-indicator status-warning';
+                        lockIcon.textContent = '🔒';
                     } else {
-                        statusIndicator.textContent = 'Закрыто';
+                        statusText.textContent = 'Закрыто';
                         statusIndicator.className = 'status-indicator status-closed';
+                        lockIcon.textContent = '🔒';
                     }
                 } else if (totalMinutes >= openTime && totalMinutes < closeTime) {
-                    statusIndicator.textContent = 'Открыто';
+                    statusText.textContent = 'Открыто';
                     statusIndicator.className = 'status-indicator status-open';
+                    lockIcon.textContent = '🔓';
                 } else if (totalMinutes >= closeTime) {
-                    statusIndicator.textContent = 'Закрыто';
+                    statusText.textContent = 'Закрыто';
                     statusIndicator.className = 'status-indicator status-closed';
+                    lockIcon.textContent = '🔒';
                 }
             } else if (dayOfWeek === 6) { // Суббота
                 const openTime = 9 * 60; // 9:00
@@ -942,18 +956,22 @@
                 if (totalMinutes < openTime) {
                     const minutesToOpen = openTime - totalMinutes;
                     if (minutesToOpen <= 60) {
-                        statusIndicator.textContent = `До открытия осталось: ${minutesToOpen} минут`;
+                        statusText.textContent = `До открытия осталось: ${minutesToOpen} минут`;
                         statusIndicator.className = 'status-indicator status-warning';
+                        lockIcon.textContent = '🔒';
                     } else {
-                        statusIndicator.textContent = 'Закрыто';
+                        statusText.textContent = 'Закрыто';
                         statusIndicator.className = 'status-indicator status-closed';
+                        lockIcon.textContent = '🔒';
                     }
                 } else if (totalMinutes >= openTime && totalMinutes < closeTime) {
-                    statusIndicator.textContent = 'Открыто';
+                    statusText.textContent = 'Открыто';
                     statusIndicator.className = 'status-indicator status-open';
+                    lockIcon.textContent = '🔓';
                 } else if (totalMinutes >= closeTime) {
-                    statusIndicator.textContent = 'Закрыто';
+                    statusText.textContent = 'Закрыто';
                     statusIndicator.className = 'status-indicator status-closed';
+                    lockIcon.textContent = '🔒';
                 }
             }
         }
