@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Поддержать исследование</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #222;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 24px;
+      color: #1a1a1a;
+    }
+
+    .message {
+      font-size: 17px;
+      margin-bottom: 32px;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .btn-payment {
+      display: inline-block;
+      padding: 14px 32px;
+      background-color: #000000;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-payment:hover {
+      opacity: 0.9;
+    }
+
+    .note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* Цвет фона сообщения по состоянию */
+    .hopeless-bg     { background-color: #e6ecf2; color: #003366; }
+    .anxious-bg      { background-color: #ffebe6; color: #cc0000; }
+    .apathetic-bg    { background-color: #f0f0f0; color: #555555; }
+    .neutral-bg      { background-color: #e8f5e9; color: #2e7d32; }
+    .hopeful-bg      { background-color: #fff8e1; color: #5d4037; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Поддержать исследование</h1>
+    <div id="message" class="message"></div>
+
+    <!-- Замените HREF на вашу реальную Stripe Payment Link -->
+    <a href="https://buy.stripe.com/ваша_ссылка" id="paymentLink" class="btn-payment">
+      Поддержать (от 10 ₽)
+    </a>
+
+    <p class="note">
+      Это символический взнос. Все средства пойдут на развитие исследований в области психологии цифровой среды.
+      После оплаты вы получите доступ к позитивному завершению эксперимента.
+    </p>
+  </div>
+
+  <script>
+    // Получаем состояние из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const state = urlParams.get('state');
+
+    if (!state) {
+      window.location.href = 'psy1.html';
+    }
+
+    // Настройки по состояниям
+    const states = {
+      hopeless: {
+        title: "Вы выбрали путь через тьму",
+        message: "Даже в безнадёжности есть точка опоры. Ваш жест — шаг к свету.",
+        bgClass: "hopeless-bg"
+      },
