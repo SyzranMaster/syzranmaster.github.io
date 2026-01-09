@@ -1,9 +1,42 @@
+<!-- next-step.html -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Тест</title>
+  <meta charset="utf-8">
+  <title>Следующий шаг</title>
 </head>
 <body>
-  <h1>я НЕ должен переходить на index.html</h1>
+  <p id="message">Загрузка...</p>
+
+  <script>
+    // Получаем состояние из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const state = urlParams.get('state');
+
+    if (!state) {
+      window.location.href = '/';
+    }
+
+    // Здесь можно показать персонализированный контент
+    const messages = {
+      hopeless: "Вы выбрали путь через тьму. Но даже здесь есть выход.",
+      anxious: "Вы почувствовали тревогу — и решили с ней справиться.",
+      apathetic: "Вы устали. Мы сделаем следующий шаг за вас.",
+      neutral: "Вы спокойны. Давайте решим, куда двигаться.",
+      hopeful: "Вы уже видите свет. Помогите ему разгореться."
+    };
+
+    document.getElementById('message').textContent = messages[state] || "Спасибо за выбор.";
+
+    // Через 2 сек — показать кнопку действия
+    setTimeout(() => {
+      document.body.innerHTML += `
+        <br><br>
+        <a href="/consent.html?state=${state}" style="padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:4px;">
+          Продолжить участие
+        </a>
+      `;
+    }, 2000);
+  </script>
 </body>
 </html>
