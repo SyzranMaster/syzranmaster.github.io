@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Эмоциональный выбор</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 32px;
+      color: #222;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (min-width: 600px) {
+      .options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .options {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .option {
+      border: none;
+      border-radius: 8px;
+      padding: 16px 12px;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .option:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .option:active {
+      transform: translateY(0);
+    }
+
+    /* Цвета по Люшеру */
+    .hopeless     { background-color: #003366; } /* Безнадёжность */
+    .anxious      { background-color: #CC0000; } /* Тревога */
+    .apathetic    { background-color: #808080; } /* Апатия */
+    .neutral      { background-color: #4CAF50; } /* Нейтральность */
+    .hopeful      { background-color: #FFD700; color: #222; text-shadow: none; } /* Надежда */
+
+    .footer {
+      margin-top: auto;
+      font-size: 12px;
+      color: #777;
+      margin-top: 40px;
+    }
+
+    .footer a {
+      color: #555;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Что ближе к тому, как вы себя чувствуете сейчас?</h1>
+
+    <div class="options">
+      <button class="option hopeless" data-state="hopeless">
+        Даже это можно изменить
+      </button>
+      <button class="option anxious" data-state="anxious">
+        Останови это — прямо сейчас
+      </button>
+      <button class="option apathetic" data-state="apathetic">
+        Просто нажми. Без усилий
+      </button>
+      <button class="option neutral" data-state="neutral">
+        Выбери, что дальше
+      </button>
+      <button class="option hopeful" data-state="hopeful">
+        Сделай шаг — и всё засияет
+      </button>
+    </div>
+
+    <div class="footer">
+      Это часть научного исследования. 
+      <a href="/about" target="_blank">Подробнее</a>
+    </div>
+  </div>
+
+  <script>
+    // Сохраняем выбор и переходим к следующему шагу
+    document.querySelectorAll('.option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const state = btn.getAttribute('data-state');
+        
+        // Сохраняем в localStorage (анонимно, временно)
+        localStorage.setItem('selectedEmotionalState', state);
+        localStorage.setItem('selectionTimestamp', Date.now());
+
+        // Переход к следующей странице (например, согласие или платёж)
+        window.location.href = '/next-step.html?state=' + state;
+      });
+    });
+  </script>
+</body>
+</html>
+
+<!-- next-step.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Следующий шаг</title>
+</head>
+<body>
+  <p id="message">Загрузка...</p>
+
+  <script>
+    // Получаем состояние из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const state = urlParams.get('state');
+
+    if (!state) {
+      window.location.href = '/';
+    }
+
+    // Здесь можно показать персонализированный контент
+    const messages = {
+      hopeless: "Вы выбрали путь через тьму. Но даже здесь есть выход.",
+      anxious: "Вы почувствовали тревогу — и решили с ней справиться.",
+      apathetic: "Вы устали. Мы сделаем следующий шаг за вас.",
+      neutral: "Вы спокойны. Давайте решим, куда двигаться.",
+      hopeful: "Вы уже видите свет. Помогите ему разгореться."
+    };
+
+    document.getElementById('message').textContent = messages[state] || "Спасибо за выбор.";
+
+    // Через 2 сек — показать кнопку действия
+    setTimeout(() => {
+      document.body.innerHTML += `
+        <br><br>
+        <a href="/consent.html?state=${state}" style="padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:4px;">
+          Продолжить участие
+        </a>
+      `;
+    }, 2000);
+  </script>
+</body>
+</html>
