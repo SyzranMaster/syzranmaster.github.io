@@ -36,12 +36,14 @@
       margin-bottom: 32px;
       padding: 20px;
       border-radius: 12px;
+      background-color: #f9f9f9;
+      color: #444;
     }
 
-    .btn-payment {
+    .btn-next {
       display: inline-block;
       padding: 14px 32px;
-      background-color: #000000;
+      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border-radius: 8px;
@@ -50,8 +52,8 @@
       transition: opacity 0.2s;
     }
 
-    .btn-payment:hover {
-      opacity: 0.9;
+    .btn-next:hover {
+      opacity: 0.92;
     }
 
     .note {
@@ -59,44 +61,62 @@
       font-size: 13px;
       color: #666;
     }
-
-    /* Цвет фона сообщения по состоянию */
-    .hopeless-bg     { background-color: #e6ecf2; color: #003366; }
-    .anxious-bg      { background-color: #ffebe6; color: #cc0000; }
-    .apathetic-bg    { background-color: #f0f0f0; color: #555555; }
-    .neutral-bg      { background-color: #e8f5e9; color: #2e7d32; }
-    .hopeful-bg      { background-color: #fff8e1; color: #5d4037; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 id="title">Поддержать исследование</h1>
+    <h1 id="title">Спасибо за ваш выбор</h1>
     <div id="message" class="message"></div>
 
-    <!-- Замените HREF на вашу реальную Stripe Payment Link -->
-    <a href="https://buy.stripe.com/ваша_ссылка" id="paymentLink" class="btn-payment">
-      Поддержать (от 10 ₽)
+    <a href="#" id="nextBtn" class="btn-next">
+      Перейти к завершению
     </a>
 
     <p class="note">
-      Это символический взнос. Все средства пойдут на развитие исследований в области психологии цифровой среды.
-      После оплаты вы получите доступ к позитивному завершению эксперимента.
+      Научный эксперимент не требует обязательной оплаты.  
+      Ваше участие уже ценно.
     </p>
   </div>
 
   <script>
     // Получаем состояние из URL
     const urlParams = new URLSearchParams(window.location.search);
-    const state = urlParams.get('state');
+    const state = urlParams.get('state') || 'neutral';
 
-    if (!state) {
-      window.location.href = 'psy1.html';
-    }
-
-    // Настройки по состояниям
+    // Тексты по состояниям
     const states = {
-      hopeless: {
-        title: "Вы выбрали путь через тьму",
-        message: "Даже в безнадёжности есть точка опоры. Ваш жест — шаг к свету.",
-        bgClass: "hopeless-bg"
+      hopeless: { 
+        title: "Вы выбрали путь через тьму", 
+        message: "Даже в безнадёжности можно найти свет. Спасибо, что сделали шаг." 
       },
+      anxious:  { 
+        title: "Вы почувствовали тревогу", 
+        message: "Вы не одни. Этот эксперимент — пространство, где тревогу можно превратить в действие." 
+      },
+      apathetic:{ 
+        title: "Вы устали", 
+        message: "Мы ценим, что вы нашли силы дойти до этого момента. Отдыхайте — вы заслужили." 
+      },
+      neutral:  { 
+        title: "Вы спокойны", 
+        message: "Ваше спокойствие — ресурс. Пусть оно останется с вами." 
+      },
+      hopeful:  { 
+        title: "Вы уже видите свет", 
+        message: "Ваша надежда — искра для других. Спасибо, что делитесь ею." 
+      }
+    };
+
+    const config = states[state] || states.neutral;
+    document.getElementById('title').textContent = config.title;
+    document.getElementById('message').textContent = config.message;
+
+    // Переход к завершению
+    document.getElementById('nextBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      // Сохраняем состояние для thank-you.html
+      window.location.href = 'thank-you.html?state=' + encodeURIComponent(state);
+    });
+  </script>
+</body>
+</html>
