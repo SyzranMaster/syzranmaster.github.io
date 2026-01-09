@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Спасибо за участие</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fff9e6 0%, #e6f7ff 100%);
+      color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Анимированные элементы фона */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    .blob-1 { width: 200px; height: 200px; background: #FFD700; top: -80px; left: -80px; }
+    .blob-2 { width: 150px; height: 150px; background: #4CAF50; bottom: -60px; right: -60px; }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+    }
+
+    .message {
+      font-size: 18px;
+      margin-bottom: 32px;
+      color: #333;
+    }
+
+    .debrief {
+      background: #f0f9ff;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 32px 0;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .debrief h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #0d4a6b;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 16px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* Анимация появления */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content > * {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .content > *:nth-child(1) { animation-delay: 0.1s; }
+    .content > *:nth-child(2) { animation-delay: 0.2s; }
+    .content > *:nth-child(3) { animation-delay: 0.3s; }
+    .content > *:nth-child(4) { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="container">
+    <div class="content">
+      <h1 id="title">Спасибо за участие!</h1>
+      <div id="message" class="message"></div>
+
+      <div class="debrief">
+        <h2>Что это было?</h2>
+        <p>
+          Вы участвовали в научном эксперименте, изучающем, 
+          как люди в разных эмоциональных состояниях выбирают контент, 
+          отражающий их внутренний мир. 
+          Ваш выбор — ценный вклад в понимание эмоционального восприятия.
+        </p>
+        <p style="margin-top: 12px; font-style: italic;">
+          Исследование проводится анонимно. Результаты будут опубликованы в обобщённой форме.
+        </p>
+      </div>
+
+      <!-- Опрос (опционально) -->
+      <a href="https://forms.gle/ВАШ_АНОНИМНЫЙ_ОПРОС" target="_blank" class="btn">
+        Пройти короткий опрос (2 минуты)
+      </a>
+
+      <div class="footer">
+        По вопросам исследования: research@ваш-домен.ru
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Получаем состояние
+    const urlParams = new URLSearchParams(window.location.search);
+    const state = urlParams.get('state') || 'neutral';
+
+    // Персонализированные сообщения
+    const messages = {
+      hopeless: "Тьма не вечна. Вы доказали: даже в ней можно найти силу сделать шаг.",
+      anxious:  "Тревога — не приговор. Вы показали, что её можно превратить в действие.",
+      apathetic:"Усталость — знак того, что вы многое пережили. Отдохните. Вы заслужили покой.",
+      neutral:  "Ваше спокойствие — дар. Пусть оно станет основой для новых решений.",
+      hopeful:  "Надежда заразительна. Благодаря вам кто-то другой тоже поверит в свет."
+    };
+
+    const message = messages[state] || messages.neutral;
+    document.getElementById('message').textContent = message;
+
+    // Очистка localStorage (опционально)
+    localStorage.removeItem('selectedEmotionalState');
+    localStorage.removeItem('consentGiven');
+  </script>
+</body>
+</html>
